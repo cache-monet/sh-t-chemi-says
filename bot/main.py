@@ -24,8 +24,8 @@ async def on_ready():
 
 @bot.event
 async def on_message(msg):
-    # add new quotable message if one is posted in quota
-    if msg.channel.id == int(QUOTA_CHANNEL):
+    # add new quotable message to [quotas] if one is posted in quota channel
+    if msg.channel.id == int(QUOTA_CHANNEL) and not bot.user.mentioned_in(msg) and msg.author != bot.user:
       quotas.append(msg)
     # post a message from quotas
     if bot.user.mentioned_in(msg):
